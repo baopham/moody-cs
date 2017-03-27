@@ -16,7 +16,7 @@ Requirements:
 
 Install:
 --------
-https://www.microsoft.com/net/core#macos
+https://www.microsoft.com/net/core
 
 
 License:
