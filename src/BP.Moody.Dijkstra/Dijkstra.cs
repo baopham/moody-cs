@@ -113,7 +113,7 @@ namespace BP.Moody.Dijkstra
         {
             foreach (var edge in edges)
             {
-                if (edge.contains(from) && edge.contains(to))
+                if (edge.Contains(from) && edge.Contains(to))
                 {
                     return edge.weight;
                 }
