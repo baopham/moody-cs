@@ -41,6 +41,11 @@ namespace BP.Moody.Dijkstra
 
         public void PrintShortestPath(Vertex destination)
         {
+            if (source == null)
+            {
+                throw new Exception("source has not been set");
+            }
+
             var vertices = GetShortestPath(destination);
 
             Console.WriteLine(vertices.Select(v => v.name).Aggregate((v1, v2) => v1 + "->" + v2));
@@ -48,6 +53,11 @@ namespace BP.Moody.Dijkstra
 
         public LinkedList<Vertex> GetShortestPath(Vertex destination)
         {
+            if (source == null)
+            {
+                throw new Exception("source has not been set");
+            }
+
             var path = new LinkedList<Vertex>();
             var currentVertex = destination;
 
