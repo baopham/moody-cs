@@ -17,7 +17,7 @@ namespace BP.Moody.Dijkstra
             this.weight = weight;
         }
 
-        public bool contains(Vertex vertex)
+        public bool Contains(Vertex vertex)
         {
             return vertex1.Equals(vertex) || vertex2.Equals(vertex);
         }
