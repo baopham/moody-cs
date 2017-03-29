@@ -16,8 +16,8 @@ namespace BP.Moody.Dijkstra
 
         public Dijkstra(Graph graph)
         {
-            edges = graph.edges;
-            vertices = graph.vertices;
+            edges = new List<Edge>(graph.edges);
+            vertices = new List<Vertex>(graph.vertices);
         }
 
         public Dijkstra SetSource(Vertex source)
