@@ -16,8 +16,8 @@ namespace BP.Moody.Dijkstra
 
         public Dijkstra(Graph graph)
         {
-            edges = new List<Edge>(graph.edges);
-            vertices = new List<Vertex>(graph.vertices);
+            edges = new List<Edge>(graph.Edges);
+            vertices = new List<Vertex>(graph.Vertices);
         }
 
         public Dijkstra SetSource(Vertex source)
@@ -46,12 +46,12 @@ namespace BP.Moody.Dijkstra
                 throw new Exception("source has not been set");
             }
 
-            var vertices = GetShortestPath(destination);
+            var vertices = FindShortestPath(destination);
 
             Console.WriteLine(vertices.Select(v => v.name).Aggregate((v1, v2) => v1 + "->" + v2));
         }
 
-        public LinkedList<Vertex> GetShortestPath(Vertex destination)
+        public LinkedList<Vertex> FindShortestPath(Vertex destination)
         {
             if (source == null)
             {
@@ -125,11 +125,11 @@ namespace BP.Moody.Dijkstra
             {
                 if (edge.Contains(from) && edge.Contains(to))
                 {
-                    return edge.weight;
+                    return edge.Weight;
                 }
             }
 
-            throw new Exception("No edge that contains the given vertices");
+            throw new Exception("No edge that contains the given Vertices");
         }
 
         private void Init()
@@ -146,13 +146,13 @@ namespace BP.Moody.Dijkstra
 
             foreach (var edge in edges)
             {
-                if (edge.vertex1.Equals(vertex))
+                if (edge.Vertex1.Equals(vertex))
                 {
-                    neighbours.Add(edge.vertex2);
+                    neighbours.Add(edge.Vertex2);
                 }
-                else if (edge.vertex2.Equals(vertex))
+                else if (edge.Vertex2.Equals(vertex))
                 {
-                    neighbours.Add(edge.vertex1);
+                    neighbours.Add(edge.Vertex1);
                 }
             }
 

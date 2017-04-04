@@ -4,22 +4,22 @@ namespace BP.Moody.Dijkstra
 {
     public class Edge
     {
-        public string id { get; }
-        public Vertex vertex1 { get;  }
-        public Vertex vertex2 { get;  }
-        public double weight { get;  }
+        public string Id { get; }
+        public Vertex Vertex1 { get; }
+        public Vertex Vertex2 { get; }
+        public double Weight { get; }
 
         public Edge(Vertex vertex1, Vertex vertex2, double weight)
         {
-            id = Guid.NewGuid().ToString();
-            this.vertex1 = vertex1;
-            this.vertex2 = vertex2;
-            this.weight = weight;
+            Id = Guid.NewGuid().ToString();
+            Vertex1 = vertex1;
+            Vertex2 = vertex2;
+            Weight = weight;
         }
 
         public bool Contains(Vertex vertex)
         {
-            return vertex1.Equals(vertex) || vertex2.Equals(vertex);
+            return Vertex1.Equals(vertex) || Vertex2.Equals(vertex);
         }
 
         public override bool Equals(object obj)
@@ -31,20 +31,20 @@ namespace BP.Moody.Dijkstra
                 return false;
             }
 
-            return edge.id == id &&
-                   edge.weight == weight &&
-                   edge.vertex1.Equals(vertex1) &&
-                   edge.vertex2.Equals(vertex2);
+            return edge.Id == Id &&
+                   edge.Weight.Equals(Weight) &&
+                   edge.Vertex1.Equals(Vertex1) &&
+                   edge.Vertex2.Equals(Vertex2);
         }
 
         public override int GetHashCode()
         {
-            return id.GetHashCode() ^ weight.GetHashCode() ^ vertex1.GetHashCode() ^ vertex2.GetHashCode();
+            return Id.GetHashCode() ^ Weight.GetHashCode() ^ Vertex1.GetHashCode() ^ Vertex2.GetHashCode();
         }
 
         public override string ToString()
         {
-            return $"{vertex1.name} --- {vertex2.name}";
+            return $"{Vertex1.name} --- {Vertex2.name}";
         }
     }
 }

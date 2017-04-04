@@ -4,13 +4,13 @@ namespace BP.Moody.Dijkstra
 {
     public class Graph
     {
-        public IList<Vertex> vertices { get;  }
-        public IList<Edge> edges { get; }
+        public IList<Vertex> Vertices { get; }
+        public IList<Edge> Edges { get; }
 
         public Graph(IList<Vertex> vertices, IList<Edge> edges)
         {
-            this.vertices = vertices;
-            this.edges = edges;
+            Vertices = vertices;
+            Edges = edges;
         }
     }
 }

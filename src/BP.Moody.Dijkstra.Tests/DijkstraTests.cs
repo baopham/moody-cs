@@ -52,7 +52,7 @@ namespace BP.Moody.Dijkstra.Tests
 
             var algorithm = new Dijkstra(graph);
 
-            Assert.Equal(shortestPathToVertexE, algorithm.SetSource(vertexA).GetShortestPath(vertexE));
+            Assert.Equal(shortestPathToVertexE, algorithm.SetSource(vertexA).FindShortestPath(vertexE));
         }
     }
 }
