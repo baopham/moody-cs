@@ -85,5 +85,36 @@ namespace BP.Moody.AStar
 
             return neighbours.Where(neighbour => CellIsValid(neighbour) && !CellIsBlocked(neighbour)).ToList();
         }
+
+        public void Print(IList<Cell> flags)
+        {
+            var grid = new List<string>();
+
+            for (var y = 0; y < Height; y++)
+            {
+                var row = new List<string>();
+
+                for (var x = 0; x < Width; x++)
+                {
+                    var cell = new Cell(x, y);
+                    var marker = GetCellMarker(flags, cell);
+                    row.Add(marker);
+                }
+
+                grid.Add(row.Aggregate((m1, m2) => m1 + " " + m2));
+            }
+
+            Console.WriteLine(grid.Aggregate((r1, r2) => r1 + Environment.NewLine + r2));
+        }
+
+        private string GetCellMarker(IEnumerable<Cell> flags, Cell cell)
+        {
+            if (CellIsBlocked(cell))
+            {
+                return "■";
+            }
+
+            return flags.Contains(cell) ? "✘" : "☐";
+        }
     }
 }

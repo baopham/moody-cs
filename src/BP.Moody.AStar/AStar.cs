@@ -12,7 +12,6 @@ namespace BP.Moody.AStar
         private ISet<Cell> closedList;
         private IPriorityQueue<Cell, int> openQueue;
         private IDictionary<Cell, int> movementCosts;
-        private IDictionary<Cell, int> overallCosts;
 
         public AStar(Grid grid)
         {
@@ -48,21 +47,19 @@ namespace BP.Moody.AStar
                         continue;
                     }
 
-                    var tentativeMovementCost = movementCosts[currentCell] + GetMovementCost(currentCell, neighbour);
+                    var tentativeMovementCost = movementCosts[currentCell] + GetHeuristicCost(currentCell, neighbour);
 
                     if (!openQueue.Contains(neighbour))
                     {
-                        openQueue.Enqueue(neighbour, tentativeMovementCost);
+                        openQueue.Enqueue(neighbour, tentativeMovementCost + heuristicCosts[neighbour]);
                     }
-
-                    if (movementCosts.ContainsKey(neighbour) && tentativeMovementCost >= movementCosts[neighbour])
+                    else if (movementCosts.ContainsKey(neighbour) && tentativeMovementCost >= movementCosts[neighbour])
                     {
                         continue;
                     }
 
                     cameFrom[neighbour] = currentCell;
                     movementCosts[neighbour] = tentativeMovementCost;
-                    overallCosts[neighbour] = tentativeMovementCost + heuristicCosts[neighbour];
                 }
             }
 
@@ -100,13 +97,8 @@ namespace BP.Moody.AStar
                 [start] = 0
             };
 
-            overallCosts = new Dictionary<Cell, int>
-            {
-                [start] = heuristicCosts[start]
-            };
-
             openQueue = new SimplePriorityQueue<Cell, int>();
-            openQueue.Enqueue(start, overallCosts[start]);
+            openQueue.Enqueue(start, heuristicCosts[start]);
         }
 
         private void FindAllHeuristicCosts()
@@ -136,17 +128,6 @@ namespace BP.Moody.AStar
             }
 
             return Math.Abs(to.X - from.X) - Math.Abs(to.Y - to.Y);
-        }
-
-        // G cost
-        private int GetMovementCost(Cell from, Cell to)
-        {
-            if (from.Equals(grid.StartCell))
-            {
-                return 0;
-            }
-
-            return from.X != to.X && from.Y != to.Y ? 14 : 10;
         }
     }
 }
